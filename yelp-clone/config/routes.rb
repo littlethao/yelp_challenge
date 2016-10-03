@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  get 'restaurant/new'
+
+  resources :restaurants
+
+  get 'restaurants/new'
 
   get 'welcome/index'
 
