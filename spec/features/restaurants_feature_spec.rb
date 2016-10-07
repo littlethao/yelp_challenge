@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'helper.rb'
 
 feature 'restaurants' do
   context 'no restaurants have been added' do

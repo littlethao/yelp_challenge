@@ -8,7 +8,6 @@ class ReviewsController < ApplicationController
   def create
     @restaurant = Restaurant.find(params[:restaurant_id])
     @review = @restaurant.reviews.build_with_user(review_params, current_user)
-
     if @review.save
       redirect_to '/restaurants'
     else
@@ -21,6 +20,34 @@ class ReviewsController < ApplicationController
         render :new
       end
     end
+  end
+
+  def edit
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @review = Review.find(params[:id])
+  end
+
+  def update
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @review = Review.find(params[:id])
+    if @review.user_id == current_user.id
+      @review.update(review_params)
+    else
+      flash[:alert] = 'Not allowed'
+    end
+    redirect_to '/restaurants'
+  end
+
+  def destroy
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @review = Review.find(params[:id])
+    if @review.user_id == current_user.id
+      @review.destroy
+      flash[:notice] = 'Review deleted successfully'
+    else
+      flash[:alert] = 'Not allowed'
+    end
+    redirect_to '/restaurants'
   end
 
   private

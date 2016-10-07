@@ -14,9 +14,15 @@
       <%= "#{review.rating} stars!" %>
       <br>
       <br>
+      <% if user_signed_in? && current_user.id == review.user_id %>
+        <%= link_to "Edit Review #{review.thoughts}", edit_restaurant_review_path(review.restaurant_id, review.id)%>
+        <%= link_to "Delete #{review.thoughts}", restaurant_review_path(review.restaurant_id, review.id), method: :delete %>
+      <% end %>
     <% end %>
 
-    <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
+    <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %><br>
+
+
 
     <% if user_signed_in? && current_user.id == restaurant.user_id %>
       <%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %>
