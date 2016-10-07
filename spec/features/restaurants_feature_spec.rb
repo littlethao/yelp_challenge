@@ -71,10 +71,8 @@ feature 'restaurants' do
   end
 
   context 'deleting restaurants' do
-
     before { User.create email: 'test@test.com', password: 'password' }
     before { User.create email: 'test2@test.com', password: 'password2'}
-    # before { Restaurant.create name: 'KFC', description: 'Deep fried goodness' }
 
     scenario 'removes a restaurant when a user clicks a delete link' do
       log_in_1
@@ -98,7 +96,6 @@ feature 'restaurants' do
   end
 
   context 'creating restaurants' do
-
     before { User.create email: 'test@test.com', password: 'password' }
 
     context 'an invalid restaurant' do
@@ -114,7 +111,6 @@ feature 'restaurants' do
   end
 
   context 'a user is limited in actions depending on log in status' do
-
     scenario 'a user cannot add a restaurant without logging in' do
       visit '/restaurants'
       expect(page).not_to have_link 'Add a restaurant'
